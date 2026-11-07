@@ -1,0 +1,21 @@
+
+Nome do jogo: zelda
+Ano de lancamento: 1990
+Genero do jogo: aventura
+Produtora do jogo: nintendo
+Valor: 2.00
+
+
+Nome do jogo: mario
+Ano de lancamento: 1900
+Genero do jogo: aventura
+Produtora do jogo: nintendo
+Valor: 1.00
+
+
+Nome do jogo: atari
+Ano de lancamento: 1976
+Genero do jogo: acao
+Produtora do jogo: atari
+Valor: 6.00
+

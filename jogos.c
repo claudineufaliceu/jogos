@@ -34,6 +34,7 @@ void retirar_enter(string str);
 void formatar_maiuscula(string str);
 void listar_jogos_cadastrados(no_t *lista);
 int sub_menu_cadastro();
+void exportar_dados_arquivo_texto(char* nome, no_t *lista);
 
 int main() {
     int opc_principal, opc_sub;
@@ -72,6 +73,10 @@ int main() {
             case 4: 
 
                 break;
+            case 5:
+                exportar_dados_arquivo_texto("jogos.txt", lista);
+                
+                break;
         }
 
 
@@ -89,6 +94,7 @@ int menu() {
     printf("2 - Listar jogos cadastrados\n");
     printf("3 - Encontrar um jogo por nome\n");
     printf("4 - Excluir jogo da lista\n");
+    printf("5 - Exportar dados para arquivo texto\n");
     printf("0 - Sair do programa\n");
     printf("-----------------------------\n\n");
     printf("usr-> ");
@@ -118,7 +124,7 @@ int sub_menu_cadastro() {
 jogo_t novo_jogo() {
     jogo_t novo;
 
-    printf("Nome do jogo: ");
+    printf("\nNome do jogo: ");
     fgets(novo.nome, T_STR, stdin);
     retirar_enter(novo.nome);
     formatar_maiuscula(novo.nome);
@@ -185,7 +191,7 @@ no_t localizar_jogo_por_nome(string nome, no_t *lista) {
 }
 
 void mostrar_dados_jogo(jogo_t dados_jogo) {
-    printf("Nome do jogo: %s\n", dados_jogo.nome);
+    printf("\nNome do jogo: %s\n", dados_jogo.nome);
     printf("Ano de lancamento: %i\n", dados_jogo.ano);
     printf("Genero do jogo: %s\n", dados_jogo.genero);
     printf("Produtora do jogo: %s\n", dados_jogo.produtora);
@@ -211,4 +217,22 @@ void listar_jogos_cadastrados(no_t *lista) {
         mostrar_dados_jogo(lista -> dados_jogo);
         lista = lista -> prox;
     }
+}
+
+void exportar_dados_arquivo_texto(char* nome, no_t *lista) {
+    FILE *fd = NULL;
+
+    fd = fopen(nome, "w");
+
+    if (!fd) return;
+
+    for (lista; lista != NULL; lista = lista -> prox) {
+    fprintf(fd, "\nNome do jogo: %s\n", lista -> dados_jogo.nome);
+    fprintf(fd, "Ano de lancamento: %i\n", lista -> dados_jogo.ano);
+    fprintf(fd, "Genero do jogo: %s\n", lista -> dados_jogo.genero);
+    fprintf(fd, "Produtora do jogo: %s\n", lista -> dados_jogo.produtora);
+    fprintf(fd, "Valor: %.2f\n\n", lista -> dados_jogo.valor);
+    }
+
+    fclose(fd);
 }
